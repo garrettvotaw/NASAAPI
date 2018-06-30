@@ -48,7 +48,11 @@ class APODViewController: UIViewController {
                             self.image = image
                             self.shareButton.isEnabled = true
                         } else if let error = error {
-                            print(error)
+                            switch error {
+                            case .jsonParsingFailure: self.presentAlert(title: "Parsing Error", message: "Oops! It looks like something went wrong on the backend!")
+                            case .responseUnsuccessful: self.presentAlert(title: "Response Unsuccessful", message: "It looks like your network might be down. Please try again.")
+                            default: self.presentAlert(title: "Something Went Wrong", message: "Oops! It looks like something went wrong on the backend!")
+                            }
                         }
                     }
                 } else {
@@ -56,7 +60,11 @@ class APODViewController: UIViewController {
                     self.imageView.image = #imageLiteral(resourceName: "VideoImagePlaceHolder")
                 }
             } else if let error = error {
-                print(error)
+                switch error {
+                    case .jsonParsingFailure: self.presentAlert(title: "Parsing Error", message: "Oops! It looks like something went wrong on the backend!")
+                    case .responseUnsuccessful: self.presentAlert(title: "Response Unsuccessful", message: "It looks like your network might be down. Please try again.")
+                    default: self.presentAlert(title: "Something Went Wrong", message: "Oops! It looks like something went wrong on the backend!")
+                }
             }
         }
     }

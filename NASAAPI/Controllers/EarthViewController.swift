@@ -45,9 +45,9 @@ class EarthViewController: UIViewController {
                 }
             } else if let error = error {
                 switch error {
-                case .jsonParsingFailure: break //present alert
-                case .responseUnsuccessful: break//present Alert
-                default: break//present alert
+                case .jsonParsingFailure: self.presentAlert(title: "Parsing Error", message: "Oops! It looks like something went wrong on the backend!")
+                case .responseUnsuccessful: self.presentAlert(title: "Response Unsuccessful", message: "It looks like your network might be down. Please try again.")
+                default: self.presentAlert(title: "Something Went Wrong", message: "Oops! It looks like something went wrong on the backend!")
                 }
             }
         }

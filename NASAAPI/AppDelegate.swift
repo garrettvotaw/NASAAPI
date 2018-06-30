@@ -6,6 +6,15 @@
 //  Copyright © 2018 Garrett Votaw. All rights reserved.
 //
 
+// PERFORMANCE TESTING
+/*
+ I tested each main functionality with slow, to long network connection speeds
+ in addition I checked memory usage during app use to see what my limits were.
+ */
+
+
+
+
 import UIKit
 
 @UIApplicationMain
