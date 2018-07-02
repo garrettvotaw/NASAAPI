@@ -33,6 +33,7 @@ class EarthViewController: UIViewController {
         }
     }
     
+    // This function will get the most recent Earth Image given a CLLocation value
     func getEarthImagery(for location: CLLocation) {
         let long = location.coordinate.longitude
         let lat = location.coordinate.latitude

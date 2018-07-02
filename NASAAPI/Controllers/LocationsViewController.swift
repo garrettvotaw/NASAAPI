@@ -56,18 +56,20 @@ class LocationsViewController: UITableViewController {
         let item = locations[indexPath.row]
         let location = CLLocation(latitude: item.placemark.coordinate.latitude, longitude: item.placemark.coordinate.longitude)
         self.location = location
+        let previousViewController = navigationController?.viewControllers[0] as! EarthViewController
+        previousViewController.location = location
         navigationController?.popViewController(animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let nextVC = segue.destination as! EarthViewController
         nextVC.location = location
-        
+        print("BOOOOOM")
     }
 
 }
 
-
+// MARK: - CLLocationManager Delegate Methods
 extension LocationsViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else {return}
@@ -81,7 +83,7 @@ extension LocationsViewController: CLLocationManagerDelegate {
     }
 }
 
-
+// MARK: - Search Bar Delegate Methods
 extension LocationsViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

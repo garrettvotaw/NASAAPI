@@ -77,7 +77,7 @@ class APODViewController: UIViewController {
         nextvc.apod = apod
     }
     
-    
+    // Presents the Scroll view where the user can view the Hi-res image
     @IBAction func imageTapped(_ sender: Any) {
         guard let _ = imageView.image else {return}
         guard let storyboard = storyboard else {return}
@@ -104,12 +104,15 @@ class APODViewController: UIViewController {
         }
     }
     
+    
+    //Get's previous Days APOD
     @IBAction func previousTapped(_ sender: Any) {
         numberOfDaysPrior -= 1
         let day = Calendar.current.date(byAdding: .day, value: numberOfDaysPrior, to: Date())
         getAPOD(date: day!)
     }
     
+    // Returns to today's APOD
     @IBAction func todayTapped(_ sender: Any) {
         getAPOD(date: Date())
     }
@@ -123,6 +126,8 @@ class APODViewController: UIViewController {
         }
     }
     
+    
+    // Opens a share sheet where the user can share/save the image
     @IBAction func shareTapped(_ sender: Any) {
         guard let image = image, let data = UIImageJPEGRepresentation(image, 1.0) else {return}
         let shareSheet = UIActivityViewController(activityItems: [data], applicationActivities: nil)
@@ -133,6 +138,8 @@ class APODViewController: UIViewController {
 
 
 //MARK: - Extensions
+
+//MARK: UIViewControllerTransitioningDelegate methods
 extension APODViewController: UIViewControllerTransitioningDelegate {
 
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
@@ -141,12 +148,14 @@ extension APODViewController: UIViewControllerTransitioningDelegate {
 
 }
 
+//MARK: UIViewControllerAnimatedTransitioning methods
 extension APODViewController: UIViewControllerAnimatedTransitioning {
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.5
     }
 
+    //Core Function that performs the transition and calls the animations
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         self.transitionContext = transitionContext
         let fromView = transitionContext.view(forKey: .from)
@@ -178,6 +187,7 @@ extension APODViewController: UIViewControllerAnimatedTransitioning {
 
     }
 
+    //Animation Function that animates the view
     func animateWithModalView(view: UIView, destinationFrame frame: CGRect) {
 
         UIView.animate(withDuration: self.transitionDuration(using: self.transitionContext), delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {

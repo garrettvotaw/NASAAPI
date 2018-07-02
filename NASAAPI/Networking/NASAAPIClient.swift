@@ -21,6 +21,13 @@ class NasaApiClient {
         self.init(configuration: .default)
     }
     
+    // MARK: - APOD Download Function
+    
+    /// Get's Astronomy Picture of the Day
+    ///
+    /// - Parameters:
+    ///   - date: The date of which you want the astronomy picture
+    ///   - completion: A completion handler that provides the data or an error depending upon the response
     func getAPOD(date: Date, completion: @escaping (APOD?, APIError?) -> Void) {
         let endPoint = NasaApi.apod(date: date)
         let request = endPoint.request
@@ -53,6 +60,15 @@ class NasaApiClient {
         task.resume()
     }
     
+    
+    // MARK: - Mars Rover Download Function
+    
+    /// Get's latest mars rover photos from the rover API
+    ///
+    /// - Parameters:
+    ///   - date: The earth date on which the rover photos were taken only photos from this date will be supplied
+    ///   - page: the page number for a multi-page response
+    ///   - completion: A completion handler that provides the data or an error depending upon the response
     func getMarsPhotos(date: Date, page: Int, completion: @escaping([Photo]?, APIError?) -> Void) {
         let endPoint = NasaApi.marsRover(date: date, page: page)
         let request = endPoint.request
@@ -89,6 +105,16 @@ class NasaApiClient {
         task.resume()
     }
     
+    
+    // MARK: - Earth Image Download Function
+    
+    /// Get's latest mars rover photos from the rover API
+    ///
+    /// - Parameters:
+    ///   - lat: latitude value
+    ///   - long: longitude value
+    ///   - date: The date of the picture taken (if nil, returns most recent date)
+    ///   - completion: A completion handler that provides the data or an error depending upon the response
     func getEarthImage(lat: Double, long: Double, date: Date?, completion: @escaping (EarthImage?, APIError?) -> Void ) {
         let endpoint = NasaApi.earth(lat: lat, long: long, date: date)
         let request = endpoint.request

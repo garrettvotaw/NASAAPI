@@ -29,6 +29,8 @@ class MarsRoverListController: UICollectionViewController {
         super.didReceiveMemoryWarning()
     }
     
+    
+    // Gets the Mars Images for the given date. Also recursevly returns the right amount of pages
     func getMarsImages(date: Date, numberOfPages pages: Int) {
         
         var page = 1
@@ -57,6 +59,7 @@ class MarsRoverListController: UICollectionViewController {
     }
     
     
+    //Function that uses Operations to download the photos for a given indexPath
     func downloadImageFor(_ photo: Photo, at indexPath: IndexPath) {
         if let _ = pendingOperations.downloadsInProgress[indexPath] {
             return
